@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}Food Shop{% endblock %}</title>
+	<style>
+		:root {
+			--background: #f4f6f4;
+			--surface: #ffffff;
+			--text: #242b26;
+			--muted: #59635c;
+			--accent: #256346;
+			--border: #dce3dd;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			background: var(--background);
+			color: var(--text);
+			font-family: "Segoe UI", sans-serif;
+			line-height: 1.5;
+		}
+		.container {
+			width: min(100% - 2rem, 70rem);
+			margin-inline: auto;
+		}
+		.site-header {
+			background: var(--surface);
+			border-bottom: 1px solid var(--border);
+		}
+		.header-content {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding-block: 1rem;
+		}
+		.brand {
+			color: var(--accent);
+			font-size: 1.25rem;
+			font-weight: 700;
+			text-decoration: none;
+		}
+		nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+		nav a { color: var(--muted); text-decoration: none; }
+		nav a:hover, nav a[aria-current="page"] {
+			color: var(--accent);
+			text-decoration: underline;
+			text-underline-offset: 0.25rem;
+		}
+		a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+		main { flex: 1; padding-block: 2rem; overflow-wrap: anywhere; }
+		h1 { margin-top: 0; font-size: 2rem; }
+		.site-footer {
+			padding-block: 1rem;
+			border-top: 1px solid var(--border);
+			color: var(--muted);
+			font-size: 0.875rem;
+		}
+		.site-footer p { margin: 0; }
+	</style>
+	{% block styles %}{% endblock %}
+	{% block head %}{% endblock %}
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-content">
+			<a class="brand" href="{{ url_for('index') }}">Food Shop</a>
+			<nav aria-label="Main navigation">
+				<a href="{{ url_for('index') }}"{% if request.endpoint == 'index' %} aria-current="page"{% endif %}>Home</a>
+				<a href="{{ url_for('menu') }}"{% if request.endpoint == 'menu' %} aria-current="page"{% endif %}>Menu</a>
+				<a href="{{ url_for('orders') }}"{% if request.endpoint == 'orders' %} aria-current="page"{% endif %}>Cart</a>
+				<a href="{{ url_for('login') }}"{% if request.endpoint == 'login' %} aria-current="page"{% endif %}>Login</a>
+			</nav>
+		</div>
+	</header>
+	<main class="container">
+		{% block content %}{% endblock %}
+	</main>
+	<footer class="site-footer">
+		<div class="container">
+			<p>Food Shop</p>
+		</div>
+	</footer>
+	{% block scripts %}{% endblock %}
+</body>
+</html>
