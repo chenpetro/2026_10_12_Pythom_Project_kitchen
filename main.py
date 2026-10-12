@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from database import Users, Product, Orders, Reservation
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='img')
 
 @app.route('/')
 def index():

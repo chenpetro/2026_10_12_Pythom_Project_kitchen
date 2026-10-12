@@ -2,6 +2,61 @@
 
 {% block title %}Menu | Food Shop{% endblock %}
 
+{% block styles %}
+<style>
+    .dish-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+        gap: 1.5rem;
+    }
+    .dish { margin: 0; min-width: 0; }
+    .dish img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+    .dish h2 { margin: 0.75rem 0 0.25rem; font-size: 1.25rem; }
+    .dish p { margin: 0; color: var(--muted); }
+    .dish-credit { color: var(--muted); font-size: 0.75rem; }
+</style>
+{% endblock %}
+
 {% block content %}
-    <h1>Menu page</h1>
+    <h1>Ukrainian menu</h1>
+    <div class="dish-grid">
+        <figure class="dish">
+            <img src="{{ url_for('static', filename='varenyky.jpg') }}" alt="Ukrainian varenyky filled with potatoes" width="960" height="640" decoding="async">
+            <figcaption>
+                <h2>Varenyky</h2>
+                <p>Traditional filled dumplings.</p>
+                <a class="dish-credit" href="https://commons.wikimedia.org/wiki/File:Varenyky_with_Potatoes_-_2026_-03.jpg">Photo credits and license</a>
+            </figcaption>
+        </figure>
+        <figure class="dish">
+            <img src="{{ url_for('static', filename='borsch.jpg') }}" alt="A bowl of red beetroot borsch served with sour cream" width="960" height="627" decoding="async">
+            <figcaption>
+                <h2>Borsch</h2>
+                <p>Beetroot soup with vegetables.</p>
+                <a class="dish-credit" href="https://commons.wikimedia.org/wiki/File:Borscht_served.jpg">Photo credits and license</a>
+            </figcaption>
+        </figure>
+        <figure class="dish">
+            <img src="{{ url_for('static', filename='salo.jpg') }}" alt="Pieces of cured pork fat, known as salo" width="960" height="820" decoding="async">
+            <figcaption>
+                <h2>Salo</h2>
+                <p>Traditional cured pork fat.</p>
+                <a class="dish-credit" href="https://commons.wikimedia.org/wiki/File:Sa%C5%82o.JPG">Photo credits and license</a>
+            </figcaption>
+        </figure>
+        <figure class="dish">
+            <img src="{{ url_for('static', filename='kvas.jpg') }}" alt="Bread kvas served in a glass" width="960" height="720" decoding="async">
+            <figcaption>
+                <h2>Kvas</h2>
+                <p>A refreshing fermented bread drink.</p>
+                <a class="dish-credit" href="https://commons.wikimedia.org/wiki/File:Mint_bread_kvas.jpg">Photo credits and license</a>
+            </figcaption>
+        </figure>
+    </div>
 {% endblock %}
