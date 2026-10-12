@@ -6,20 +6,33 @@
 <style>
     .dish-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+        grid-template-columns: minmax(0, 1fr);
         gap: 1.5rem;
     }
     .dish { margin: 0; min-width: 0; }
     .dish img {
         display: block;
         width: 100%;
+        height: auto;
         aspect-ratio: 4 / 3;
         object-fit: cover;
         border-radius: 6px;
     }
     .dish h2 { margin: 0.75rem 0 0.25rem; font-size: 1.25rem; }
     .dish p { margin: 0; color: var(--muted); }
-    .dish-credit { color: var(--muted); font-size: 0.75rem; }
+    .dish-credit {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--muted);
+        font-size: 0.875rem;
+    }
+    @media (min-width: 576px) {
+        .dish-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 992px) {
+        .dish-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
 </style>
 {% endblock %}
 
