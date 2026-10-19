@@ -24,8 +24,6 @@ class Product(Base):
 
     orders: Mapped[list["Orders"]] = relationship("Orders", back_populates="product") 
 
-    reservations: Mapped[list["Reservation"]] = relationship("Reservation", back_populates="products")
-
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2))
@@ -48,7 +46,5 @@ class Reservation(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     reservation_date: Mapped[date] = mapped_column(Date)
     number_of_people: Mapped[int] = mapped_column()
-
-    products: Mapped[list["Product"]] = relationship ("Product", back_populates="reservations")
 
     

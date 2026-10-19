@@ -66,13 +66,27 @@
 						<li class="nav-item"><a class="nav-link{% if request.endpoint == 'index' %} active{% endif %}" href="{{ url_for('index') }}"{% if request.endpoint == 'index' %} aria-current="page"{% endif %}>Home</a></li>
 						<li class="nav-item"><a class="nav-link{% if request.endpoint == 'menu' %} active{% endif %}" href="{{ url_for('menu') }}"{% if request.endpoint == 'menu' %} aria-current="page"{% endif %}>Menu</a></li>
 						<li class="nav-item"><a class="nav-link{% if request.endpoint == 'orders' %} active{% endif %}" href="{{ url_for('orders') }}"{% if request.endpoint == 'orders' %} aria-current="page"{% endif %}>Cart</a></li>
+						{% if g.user %}
+						<li class="nav-item"><span class="navbar-text d-block">Hello, {{ g.user.username }}</span></li>
+						<li class="nav-item">
+							<form action="{{ url_for('logout') }}" method="post">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+								<button class="nav-link" type="submit">Logout</button>
+							</form>
+						</li>
+						{% else %}
 						<li class="nav-item"><a class="nav-link{% if request.endpoint == 'login' %} active{% endif %}" href="{{ url_for('login') }}"{% if request.endpoint == 'login' %} aria-current="page"{% endif %}>Login</a></li>
+						<li class="nav-item"><a class="nav-link{% if request.endpoint == 'register' %} active{% endif %}" href="{{ url_for('register') }}"{% if request.endpoint == 'register' %} aria-current="page"{% endif %}>Register</a></li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<main class="container flex-grow-1 py-3 py-md-4">
+		{% for category, message in get_flashed_messages(with_categories=true) %}
+		<div class="alert alert-{{ category }}" role="status">{{ message }}</div>
+		{% endfor %}
 		{% block content %}{% endblock %}
 	</main>
 	<footer class="site-footer border-top py-3">
